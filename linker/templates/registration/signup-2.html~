@@ -1,0 +1,20 @@
+{% extends "parent/auth-base.html" %}
+
+{% block title %}Step 2{% endblock %}
+{% block script %} <script type="text/javascript" src="/media/javascript/topic.js"></script> {% endblock %}
+{% block content %}
+<div class="span9 well offset4" ng-app>
+<h3>Welcome </h1>
+<p>Hello <b>{{ username }}</b>. Tell us more about you.</p>
+<hr>
+<div class="topic-div" ng-app>
+	{% for genre in genre_list %}
+		<div class="topic" ng-controller = "TopicController">
+			{% verbatim %}<span class="topic_name topic" ng-model="topic.title"> {% endverbatim %} {{ genre.title }} </span><br />
+			<span class="topic_description topic"> {{ genre.identifier }} </span><br />
+			<span class="topic_button topic"><input type = "button" value="Follow" id="{{genre.title}}" class= "follow_button button" ng-click = "follow({{genre.title}})" /></span><br />
+		</div><br />
+	{% endfor %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html lang=en>
+<head>
+	<title>{% block title %}{% endblock %} - Likewyss</title>
+	<link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/media/bootstrap/custom.css" />
+	<link rel="stylesheet" type="text/css" href="/media/font-awesome/css/font-awesome.css" />
+	<script type="text/javascript" src = "/media/javascript/jquery.js"></script>
+	{% block script %}{% endblock %}
+</head>
+
+<body class="landing">
+	{% include "includes/nav" %}
+	<div class="container-fluid">
+		{% block content %}{% endblock %}
+	</div>
+</body>

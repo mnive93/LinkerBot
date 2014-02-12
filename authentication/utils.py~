@@ -1,0 +1,7 @@
+from django.http import HttpResponseRedirect
+def lr(view):
+    def new_view(request,*args,**kwargs):
+        if not request.session.get('is_authenticated'):
+            return HttpResponseRedirect('/')
+        return view(request,*args,**kwargs)
+    return new_view

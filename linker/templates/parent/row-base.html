@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>{% block title %}{% endblock %} | Likewyss</title>
+	<link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/media/bootstrap/custom.css" />
+	<link rel="stylesheet" type="text/css" href="/media/font-awesome/css/font-awesome.css" />
+	<script type="text/javascript" src = "/media/javascript/angular.js"></script>
+	<script type="text/javascript" src="/media/javascript/jquery.js"></script>
+	{% block script %}{% endblock %}
+</head>
+
+<body>
+	{% include "includes/nav" %}
+	<div class="row-fluid">
+		<div class="span8 offset2 well">
+		    {% block basic-info %}{% endblock %}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span8 offset2">
+            {% block userposts %}{% endblock %}
+        </div>
+	</div>
+</body>

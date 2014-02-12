@@ -1,0 +1,26 @@
+{% extends "parent/auth-base.html" %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+<div class="span9 well offset4">
+<hr>
+<form method="post">
+	{% if form.errors %}
+	{% for err in form.errors %}
+	<li class="text-error">Error in {{ err }}</li>
+	{% endfor %}
+	{% endif %}
+	<input type="text" class="input-xlarge" name="firstname" id="id_firstname" placeholder="First name" /><br>
+	<input type="text" class="input-xlarge" name="lastname" id="id_lastname" placeholder="Last name" /><br>
+
+	<input type="text" class="input-xlarge" name="username" id="id_username" placeholder="Username" /><br>
+	<input type="password" class="input-xlarge" name="password" id="id_password" placeholder="Password" /><br>
+	<input type="text" class = "input-xlarge" name="email" id="id_email" placeholder="Email" /><br>
+	<button type="submit" class="btn btn-success"><i class="icon-ok"></i> Let's get started</button> 
+<a href="/accounts/login/">
+		<button class="btn btn-danger"><i class='icon-unlock-alt'></i>&nbsp;&nbsp;Log </button></a>
+	{% csrf_token %}
+</form>
+</div>
+{% endblock %}

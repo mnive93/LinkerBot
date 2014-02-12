@@ -1,0 +1,24 @@
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#postform').submit(function(e) {
+  alert("heree")
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/post/',
+    data: $('#postform').serialize(),
+    dataType: 'json',
+    success: function() {}
+ });
+ return false;
+ });
+});
+</script>
+<form name='postform'  id = "postform" method='POST'>
+	{% csrf_token %}
+        {{ form.content }}
+       
+	
+<input type = "submit" value="Post" id="post_button" class= " post_button btn btn-success"  />
+</form>

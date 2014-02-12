@@ -1,0 +1,34 @@
+{% extends "parent/bi-column-base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="/media/javascript/custom.js"></script>
+    <script type="text/javascript" src="/media/javascript/post.js"></script>
+{% endblock %}
+
+{% block left-content-wrapper %}
+<div class="row-fluid">
+    <div class="post_form" ng-app="postApp">
+        {% include 'main/postform.html' %}
+    </div>
+</div>
+{% endblock %}
+
+{% block right-content-wrapper %}
+<h1>Newstream</h1>
+<hr />
+<!--<p>Let's put the feed here when we build it</p>-->
+{% for feed in feeds reversed %}
+<div class="row-fluid">
+	<div class="well post-container">
+    <strong><a href="/{{feed.username}}">{{ feed.user.get_full_name }}</a></strong>
+   <strong><a href="{{ feed.url }}"> {{  feed.title }} </a></strong>
+    	<small title="{{feed.posted_time}}">{{ feed.posted_time|timesince }} ago</small>
+    <img src="{{ feed.img_src }}" height="100" width="400"/>
+    <p class="post-content">{{ feed.content }}...Read More</p>
+    
+</div>
+</div>
+{% endfor %}
+{% endblock %}
