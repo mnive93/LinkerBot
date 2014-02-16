@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang=en>
+<head>
+	<title>{% block title %}{% endblock %} - Linker</title>
+        
+		
+	
+	<link rel="stylesheet" type="text/css" href="/media/bootstrap/custom.css" />
+       <link rel="stylesheet" href="/media/css/skel-noscript.css" />
+	<link rel="stylesheet" href="/media/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/media/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" type ="text/css" href="/media/font-awesome/css/font-awesome.min.css"/>
+    <script type="text/javascript" src = "/media/javascript/jquery.js"></script>
+	
+	{% block script %}{% endblock %}
+</head>
+
+<body>
+
+	<div>
+		{% block content %}{% endblock %}
+	</div>
+</body>

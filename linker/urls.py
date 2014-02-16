@@ -5,7 +5,7 @@ from authentication.views import home
 # admin.autodiscover()
 
 urlpatterns = patterns('authentication.views',
-        url(r'^$', 'home'),
+        url(r'^$', 'landing'),
         )
 urlpatterns += patterns('',
         url(r'^',include('main.urls')),

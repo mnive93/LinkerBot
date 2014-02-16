@@ -1,0 +1,17 @@
+{% extends "parent/auth-base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div id="intro" class="main style1 dark fullscreen"  >
+				<div class="content container small">
+					<header>
+						<h2>Hello! :)</h2>
+					</header>
+					<p>Love to know more about the things you love?Love us and we'll help you love your love interests more!!.</p>
+					<footer>
+						<a href="/accounts/login/" class="button style2 down">Login</a>
+					</footer>
+				</div>
+			</div>
+{% endblock %}

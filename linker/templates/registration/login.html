@@ -3,19 +3,39 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="row-fluid">
-	<div class="span6 offset3 well">
-		<h1>Login</h1>
+
+<div class="main style3 secondary">
+<div class="content container">
+				<header>
+						<h2>Hop In!</h2>
+						<p>Fill in your details to explore more.</p>
+</header>
+				
+<div class="box container small">
 		
-		<hr>
 		{% if message %}<p>{{ message }}</p>{% endif %}
-		<form action="." method="post" class="form-inline">
-			<input type="text" name="username" id="id_username" placeholder="Username" />
-			<input type="password" name="password" id="id_password" placeholder="Password" />
+		<form action="." method="post" >
+<div class="row">
+			<div class="6u"><input type="text" name="username" id="id_username" placeholder="Username"  /></div>
+			<div class="6u"><input type="password" name="password" id="id_password" placeholder="Password" /></div>
+
 			<input type="hidden" name="next" value="/dashboard/" />
-			<button type="submit" class="btn btn-danger"><i class="icon-unlock-alt"></i>&nbsp;Login</button>
+</div>
+<div class="row">
+<div class="12u">
+<ul class="actions">
+<li><button type="submit" class="button">Login</button></li>
+<li><a href="/accounts/signup/"><button type="button" class="button " >Register</button></a></li>
+</ul>
+</div>
+</div>
 			{% csrf_token %}
+
 		</form>
+
 	</div>
+
+</div>
 </div>
 {% endblock %}
+				

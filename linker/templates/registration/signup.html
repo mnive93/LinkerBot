@@ -3,24 +3,38 @@
 {% block title %}Signup{% endblock %}
 
 {% block content %}
-<div class="span9 well offset4">
-<hr>
+<div id="register" class="main style3 secondary">
+<div class="content container">
+<header>
+						<h2>Register</h2>
+					
+					</header>
+<div class="box container small">
 <form method="post">
+<div class="row half">
 	{% if form.errors %}
 	{% for err in form.errors %}
 	<li class="text-error">Error in {{ err }}</li>
 	{% endfor %}
 	{% endif %}
-	<input type="text" class="input-xlarge" name="firstname" id="id_firstname" placeholder="First name" /><br>
-	<input type="text" class="input-xlarge" name="lastname" id="id_lastname" placeholder="Last name" /><br>
+	<div class="6u"><input type="text"  name="firstname" id="id_firstname" placeholder="First name" /><br></div>
+	<div class="6u"><input type="text"  name="lastname" id="id_lastname" placeholder="Last name" /><br></div>
 
-	<input type="text" class="input-xlarge" name="username" id="id_username" placeholder="Username" /><br>
-	<input type="password" class="input-xlarge" name="password" id="id_password" placeholder="Password" /><br>
-	<input type="text" class = "input-xlarge" name="email" id="id_email" placeholder="Email" /><br>
-	<button type="submit" class="btn btn-success"><i class="icon-ok"></i> Let's get started</button> 
-<a href="/accounts/login/">
-		<button class="btn btn-danger"><i class='icon-unlock-alt'></i>&nbsp;&nbsp;Log in</button></a>
+	<div class="6u"><input type="text" name="username" id="id_username" placeholder="Username" /><br></div>
+	<div class="6u"><input type="password" name="password" id="id_password" placeholder="Password" /><br></div>
+	<div class="6u"><input type="text"  name="email" id="id_email" placeholder="Email" /><br></div><br/>
+<div class="row">
+<div class="12u">
+<ul class="actions">
+												
+<li><input type="submit" class="button "value="Let's get started"> </button> <li>
+</ul>
+</div>
+</div>
 	{% csrf_token %}
+</div>
 </form>
+</div>
+</div>
 </div>
 {% endblock %}
