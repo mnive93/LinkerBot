@@ -5,7 +5,7 @@ urlpatterns = patterns('',
 	(r'login/$', lr(login)),
     )
 urlpatterns += patterns('authentication.views',
-    (r'^signup/$','home')
+    (r'^signup/$','home'),
     (r'^step2/$','step2'),
     (r'^followtopic/(\w+)','follow_topic'),
     )

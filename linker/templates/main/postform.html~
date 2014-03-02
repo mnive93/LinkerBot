@@ -20,5 +20,5 @@ $(document).ready(function() {
         {{ form.content }}
        
 	
-<input type = "submit" value="Post" id="post_button" class= " post_button btn btn-success"  />
+<input type = "submit" value="Post" id="post_button" class= " post_button button "  />
 </form>

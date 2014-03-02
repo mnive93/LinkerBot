@@ -19,9 +19,13 @@ def feed(request):
 
     user = request.user
     user_genres = user.genretouser.all()
-    post_displayed = []
-    feeds_links = Links.objects.all()
-    paginator = Paginator(feeds_links, 5)
+    feed_set = []
+    for g in user_genres:
+        l = Links.objects.filter(genre=g)
+        for link in l:
+          if link!=[]:
+            feed_set.append(link)
+    paginator = Paginator(feed_set, 5)
     page = request.GET.get('page')
     try:
         feeds = paginator.page(page)
@@ -69,19 +73,38 @@ def categorize_links(request):
             decision = classify_link(content)
             genre = Genre.objects.get(title=decision)
             link = Links.objects.create(title = title , content = content,user = user,genre = genre,url = url,img_src=img_src)
-            links = []
+            links_set = []
             print decision
-            links = Links.objects.filter(genre=genre)
-            count = len(links)
+            links_set = Links.objects.filter(genre=genre)
+            count = len(links_set)
             print count
-            if count > 2:
-                for l in links:
-                   if l.id != link.id:
-                     print l.content
-                     similar = cosine_metric(l.content,content)
-                     print similar
+            if count > 3:
+              closest = 2
+              for l in links_set:
+               if l.id != link.id:
+                dist = find_similar(l.content,content)
+                if dist < closest:
+                   closest = dist
+                   new_link = l
+                print new_link.title
 
     else:
         message = "Not called via post"
     return HttpResponse(message)
+@login_required
+
+def genrefeed(request,genre):
+    g = Genre.objects.get(title=genre)
+    status = "Follow"
+    user = request.user
+    gs = user.genretouser.all()
+    if g in gs:
+        status = "Following"
+    links = Links.objects.filter(genre=g)
+    var = RequestContext(request,{
+        'feeds' : links,
+        'title' :g.title,
+        'status':status,
+        })
+    return render_to_response("main/genre.html",var)
 

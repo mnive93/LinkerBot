@@ -1,8 +1,8 @@
 {% extends "parent/row-base.html" %}
 
 {% block script %}
-    <script type="text/javascript" src="/media/javascript/comment.js"></script>
-    <script type="text/javascript" src="/media/javascript/custom.js"></script>
+    <link rel="stylesheet" href="/media/css/skel-noscript.css" />
+<link rel="stylesheet" href="/media/css/style.css" />
 {% endblock %}
 
 {% block title %}{{ user.get_full_name }}{% endblock %}
@@ -10,12 +10,10 @@
 {% block basic-info %}
 
 
-<div class="span6">
-<ul class="media-list">
-    <li class="media">
+<div class="span7">
     	<div class="media-body">
       		<h4 class="media-heading">{{user.get_full_name}}</h4>
-      		<h5>@{{usr.username}}</h5>
+      		<h5>@{{user.username}}</h5>
 		</div>
 	</li>
 </ul>
@@ -23,58 +21,21 @@
 
 
 </div>
-<div class="span6 pull-right">
-<ul class="nav nav-pills nav-stacked pull-left">
-	<li><a href="/followers/{{user.username}}"><i class="icon-star"></i> {{user.first_name}} is followed by {{followers}} people</a></li>
-	<li><a href="/following/{{user.username}}"><i class="icon-ok"></i> {{user.first_name}} follows {{following}} people</a></li>
-	<li><a href="/topics/{{user.username}}"><i class="icon-heart"></i> {{user.first_name}} loves</a></li>
-</ul>
-</div>
 
 {% endblock %}
 
 {% block userposts %}
-<div ng-app = "commentApp">
-    {% if posts %}
-        {% for post in posts %}
-        <div class="well post-container" ng-controller = "commController">
-            <strong>
-                <a href="/{{ post.user.username }}">
-                    {{ post.user.get_full_name }}
-                </a>
-            </strong>
-            <a class="post" href="{{post.get_absolute_url}}">
-            	<small>{{ post.posted_at|timesince }} ago</small>
-            </a>
-            {% autoescape off %}<p class="post-content">{{ post|urlize }}</p>{% endautoescape %}
-            <ul class="nav nav-pills">
-                <li><a href="#" alt="Like" title="Like" ng-click="upvote()"><i class="icon-chevron-up"></i> 389 likes</a></li>
-				<li><a href="#" alt="Dislike" title="Dislike" ng-click="downvote()"><i class="icon-chevron-down"></i> 26 dislikes</a></li>
-				<li><a href="#" alt="Reply" title="Reply"><i class="icon-reply"></i> 104 replies</a></li>
-				<li><a href="#" alt="Share" title="Share"><i class="icon-share"></i> 1,024 shares</a></li>
-            </ul>
-            <div class = "comments">
-                <ul>
-                {% for comm in post.comments.all %}
-                    <li><p class="name">{{ comm.commented_by.get_full_name }}</p><p class = "comment_text">{{ comm.message }}</p></li>
-                {% endfor %}
-                </ul>
-                <ul ng-repeat = "item in items">
-				    <li><p class="name">{{ user.get_full_name }}</p><p class = "comment_text">{[{item.title}]}</p></li>
-                </ul>
-            </div>
-            <hr>
-            <form name="commForm">
-                <p class="textbox"><input type="text" ng-model="comm.text" required ng-maxlength="250"/></p>
-                <input type="hidden" ng-init="comm.post ='{{ post.id }}'" ng-model="comm.post" value="{{ post.id }}" />
-                <p class="button"><input type="button" ng-disabled="!commForm.$valid" value="Comment" ng-click="clicked()"/></p>
-            </form>
-        </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert alert-error">
-        	<strong>No posts from {{user.first_name}} yet.</strong>
-		</div>
-    {% endif %}
+
+    {% if links %}
+        {% for feed in links %}
+        <div class="well">
+            <strong><a href="/{{feed.username}}">{{ feed.user.get_full_name }}</a></strong><br/>
+  <strong><a href="{{ feed.url }}"> {{  feed.title }} </a></strong>
+    	<small title="{{feed.posted_time}}">{{ feed.posted_time|timesince }} ago</small><br/>
+<strong> Posted in genre <a href="/genre/{{ feed.genre }}">{{ feed.genre }}</a> </strong><br/>
+<p class="post-content">{{ feed.content }}...Read More</p>
+<img src="{{ feed.img_src }}" height="300" width="300" class="img-rounded"/><br/>
 </div>
+{% endfor %}
+{% endif %}
 {% endblock %}
