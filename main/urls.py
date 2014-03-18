@@ -4,4 +4,5 @@ urlpatterns = patterns('main.views',
         url(r'^dashboard/$','feed'),
         url(r'^([\w._-]+)/$','profile'),
         url(r'^genre/([\w ]+)/$','genrefeed'),
+        url(r'^show_similar/(\w+)/$','show_similar'),
         )

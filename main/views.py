@@ -11,7 +11,7 @@ from main.forms import *
 from main.utils import *
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+import heapq
 import django.utils.simplejson as json
 @login_required
 def feed(request):
@@ -75,18 +75,6 @@ def categorize_links(request):
             link = Links.objects.create(title = title , content = content,user = user,genre = genre,url = url,img_src=img_src)
             links_set = []
             print decision
-            links_set = Links.objects.filter(genre=genre)
-            count = len(links_set)
-            print count
-            if count > 3:
-              closest = 2
-              for l in links_set:
-               if l.id != link.id:
-                dist = find_similar(l.content,content)
-                if dist < closest:
-                   closest = dist
-                   new_link = l
-                print new_link.title
 
     else:
         message = "Not called via post"
@@ -107,4 +95,27 @@ def genrefeed(request,genre):
         'status':status,
         })
     return render_to_response("main/genre.html",var)
+
+def show_similar(request,link_id):
+  similar_dict = {}
+  top3 = {}
+  similar_links = []
+  link_main = Links.objects.get(id=link_id)
+  set_links = Links.objects.filter(genre=link_main.genre)
+  for l in set_links:
+      if l != link_main:
+       print l.id
+       dist = find_similar(l.content,link_main.content)
+       similar_dict.setdefault(dist,0)
+       similar_dict[dist] = l.id
+  top3 = sorted(similar_dict.keys())[:3]
+  for dist in top3:
+      link = Links.objects.get(id = similar_dict[dist])
+      similar_links.append(link)
+
+  var = RequestContext(request,{
+        'feeds' : similar_links,
+        'main_link':link_main,
+      })
+  return render_to_response("main/similar.html",var)
 

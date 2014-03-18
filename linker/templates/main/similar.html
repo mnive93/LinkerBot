@@ -1,6 +1,6 @@
 {% extends "parent/bi-column-base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Similar Posts{% endblock %}
 {% block css %}
    
 <link rel="stylesheet" href="/media/css/skel-noscript.css" />
@@ -14,12 +14,9 @@
 
 
 {% block content %}
-<div class="row-fluid">
-    <div class="post_form" ng-app="postApp">
-        {% include 'main/postform.html' %}
-    </div>
+
 <header>
-<h2>News Feed</h2>
+<h2>Similar Articles to {{ main_link.title }}</h2>
 </header>
 
 
@@ -32,31 +29,12 @@
   <strong><a href="{{ feed.url }}"> {{  feed.title }} </a></strong>
     	<small title="{{feed.posted_time}}">{{ feed.posted_time|timesince }} ago</small><br/>
 <strong> Posted in genre <a href="/genre/{{ feed.genre }}">{{ feed.genre }}</a> </strong><br/>
-<p class="post-content">{{ feed.content[:150] }}...Read More</p>
+<p class="post-content">{{ feed.content }}...Read More</p>
 <img src="{{ feed.img_src }}" height="300" width="300" class="img-rounded"/><br/>
-<a href = "/show_similar/{{ feed.id }}"> <input type = "button" value="Show similar" id="{{ feed.id }}" class= " button " /></a>
 
 
 </div>
 {% endfor %}
 
-<div  class="pagination row-fluid well pagination-centered pagination-small">
-    <span class="step-links">
-        <ul class="pager">
-        {% if feeds.has_previous %}
-        <li class = "previous">  <a href="?page={{ feeds.previous_page_number }}"> Previous </a></li>
-        {% endif %}
-   
-        {% for page_num in feeds.paginator.page_range %}
-        <li > <a href="?page={{ page_num }}"> {{page_num}} </a></li>
-        {% endfor %}
-    
-        {% if feeds.has_next %}
-        <li class="next"> <a href="?page={{ feeds.next_page_number }}">Next</a></li>
-        {% endif %}
-    </ul>
-    </span>
-</div>
-	
 {% endblock %}
 
