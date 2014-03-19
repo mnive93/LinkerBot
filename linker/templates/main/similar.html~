@@ -16,7 +16,7 @@
 {% block content %}
 
 <header>
-<h2>Similar Articles to {{main_link.title}}</h2>
+<h2>Similar Articles to {{ main_link.title }}</h2>
 </header>
 
 
@@ -29,7 +29,7 @@
   <strong><a href="{{ feed.url }}"> {{  feed.title }} </a></strong>
     	<small title="{{feed.posted_time}}">{{ feed.posted_time|timesince }} ago</small><br/>
 <strong> Posted in genre <a href="/genre/{{ feed.genre }}">{{ feed.genre }}</a> </strong><br/>
-<p class="post-content">{{ feed.content }}...Read More</p>
+<p class="post-content">{{ feed.content  | truncatechars:150 }}...Read More</p>
 <img src="{{ feed.img_src }}" height="300" width="300" class="img-rounded"/><br/>
 
 

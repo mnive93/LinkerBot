@@ -34,7 +34,7 @@ $(document).ready(function() {
 <div ng-app>
 <header>
 <h2> {{ title }} Feed</h2> 
-<input type = "button" value="{{ status }}" id="{{ title }}" class= " follow_button button " ng-click = "follow({{genre.title}})" />
+<input type = "button" value="{{ status }}" id="{{ title }}" class= " follow_button button " />
 
 </header>
 </div>
@@ -48,7 +48,7 @@ $(document).ready(function() {
   <strong><a href="{{ feed.url }}"> {{  feed.title }} </a></strong>
     	<small title="{{feed.posted_time}}">{{ feed.posted_time|timesince }} ago</small><br/>
 <strong> Posted in genre <a href="/genre/{{ feed.genre }}">{{ feed.genre }}</a> </strong><br/>
-<p class="post-content">{{ feed.content }}...Read More</p>
+<p class="post-content">{{ feed.content  | truncatechars:150 }}...Read More</p>
 <img src="{{ feed.img_src }}" height="300" width="300" class="img-rounded"/><br/>
 
 

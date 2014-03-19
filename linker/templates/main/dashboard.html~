@@ -32,7 +32,7 @@
   <strong><a href="{{ feed.url }}"> {{  feed.title }} </a></strong>
     	<small title="{{feed.posted_time}}">{{ feed.posted_time|timesince }} ago</small><br/>
 <strong> Posted in genre <a href="/genre/{{ feed.genre }}">{{ feed.genre }}</a> </strong><br/>
-<p class="post-content">{{ feed.content[:150] }}...Read More</p>
+<p class="post-content">{{ feed.content | truncatechars:150 }}...Read More</p>
 <img src="{{ feed.img_src }}" height="300" width="300" class="img-rounded"/><br/>
 <a href = "/show_similar/{{ feed.id }}"> <input type = "button" value="Show similar" id="{{ feed.id }}" class= " button " /></a>
 

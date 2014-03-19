@@ -108,10 +108,15 @@ def show_similar(request,link_id):
        dist = find_similar(l.content,link_main.content)
        similar_dict.setdefault(dist,0)
        similar_dict[dist] = l.id
-  top3 = sorted(similar_dict.keys())[:3]
+  top3 = sorted(similar_dict.keys())
+  print top3
+  ran = (top3[-1]+top3[1]) / 2
+  print ran
   for dist in top3:
-      link = Links.objects.get(id = similar_dict[dist])
-      similar_links.append(link)
+      if dist < ran and dist!=None :
+       print dist
+       link = Links.objects.get(id = similar_dict[dist])
+       similar_links.append(link)
 
   var = RequestContext(request,{
         'feeds' : similar_links,
