@@ -98,7 +98,6 @@ def genrefeed(request,genre):
 
 def show_similar(request,link_id):
   similar_dict = {}
-  top3 = {}
   similar_links = []
   link_main = Links.objects.get(id=link_id)
   set_links = Links.objects.filter(genre=link_main.genre)
@@ -106,13 +105,17 @@ def show_similar(request,link_id):
       if l != link_main:
        print l.id
        dist = find_similar(l.content,link_main.content)
-       similar_dict.setdefault(dist,0)
-       similar_dict[dist] = l.id
+       if dist>0.0:
+        similar_dict.setdefault(dist,0)
+        similar_dict[dist] = l.id
+        print similar_dict[dist]
   top3 = sorted(similar_dict.keys())
+
   print top3
-  ran = (top3[-1]+top3[1]) / 2
-  print ran
-  for dist in top3:
+  if len(top3) > 3:
+   ran = (top3[-1]+top3[1]) / 2
+   print ran
+   for dist in top3:
       if dist < ran and dist!=None :
        print dist
        link = Links.objects.get(id = similar_dict[dist])

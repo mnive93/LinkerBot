@@ -84,10 +84,11 @@ def pearson(v1,v2):
 def find_similar(content1,content2):
          dist = 0.0
          similar = cosine_metric(content1,content2)
-         print similar
          if similar > 0.85:
            dist = calculate_distance(content1,content2)
+           print dist
            return dist
+
 def calculate_distance(content1,content2):
   apcount = {}
   wordscount = {}
