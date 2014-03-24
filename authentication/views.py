@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.auth import logout , login,authenticate
 from django.forms import *
+from django.contrib.auth.decorators import login_required
 from authentication.forms import *
 from authentication.models import *
 def landing(request):
@@ -50,3 +51,7 @@ def follow_topic(request,topic):
 
 
 
+@login_required
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect('/accounts/login/')

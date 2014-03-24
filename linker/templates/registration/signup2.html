@@ -11,7 +11,7 @@
 	{% for genre in genre_list %}
 		<div class="topic" ng-controller = "TopicController">
 			{% verbatim %}<span class="topic_name topic" ng-model="topic.title"> {% endverbatim %} {{ genre.title }} </span><br /> 
-            <i class="fa {{ genre.identifier }} fa-3x"> </i>
+            
 			<span class="topic_button topic"><input type = "button" value="Follow" id="{{genre.title}}" class= "follow_button button" ng-click = "follow({{genre.title}})" /></span><br />
 		</div><br />
 	{% endfor %}

@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="/media/bootstrap/custom.css" />
 <link rel="stylesheet" type="text/css" href="/media/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" type="text/css" href="/media/bootstrap/bootstrap.css" />
+     
         <script type="text/javascript" src = "/media/javascript/angular.js"></script>
         <script type="text/javascript" src="/media/javascript/jquery.js"></script>
 {% block css %} {% endblock %}
@@ -14,9 +14,8 @@
 
 <body>
 {% include "includes/nav" %}
-<div id ="content_container" class="container-fluid">
-<div class="row-fluid">
-    <div id ="content" class="flex span5">
+<div id ="content_container">
+<div class="container">
         {% block content %} {% endblock %}
       
     </div>

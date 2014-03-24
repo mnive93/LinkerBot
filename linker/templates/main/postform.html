@@ -14,6 +14,9 @@ $(document).ready(function() {
  });
 });
 </script>
+<header>
+<h2>Share your favourite sites here</h2>
+</header>
 <form name='postform'  id = "postform" method='POST'>
 	{% csrf_token %}
         {{ form.content }}

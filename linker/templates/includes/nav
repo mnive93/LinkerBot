@@ -9,11 +9,12 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-                                        <li> <h1><a class = "brand "href ="/share/"> Share </a><h1> </li>
+                                       
 					<li><a href="/{{user.username}}/">{{user.get_full_name}}</a></li>
 					
-					<li><a href="/accounts/logout/"><i class="icon-power-off"></i></a></li>
+					<li><a href="/accounts/logout/">logout</a></li>
 						</ul>
+
 					</nav>
 
 			</header>

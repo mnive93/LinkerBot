@@ -21,10 +21,12 @@ def feed(request):
     user_genres = user.genretouser.all()
     feed_set = []
     for g in user_genres:
-        l = Links.objects.filter(genre=g)
+        l = Links.objects.filter(genre=g).order_by('posted_time')
         for link in l:
           if link!=[]:
             feed_set.append(link)
+    feed_sort = sorted(feed_set,key=lambda f : f.posted_time)
+    feed_set = list(reversed(feed_sort))
     paginator = Paginator(feed_set, 5)
     page = request.GET.get('page')
     try:
@@ -99,6 +101,7 @@ def genrefeed(request,genre):
 def show_similar(request,link_id):
   similar_dict = {}
   similar_links = []
+  count = 0
   link_main = Links.objects.get(id=link_id)
   set_links = Links.objects.filter(genre=link_main.genre)
   for l in set_links:
@@ -112,18 +115,22 @@ def show_similar(request,link_id):
   top3 = sorted(similar_dict.keys())
 
   print top3
-  if len(top3) > 3:
-   ran = (top3[-1]+top3[1]) / 2
-   print ran
-   for dist in top3:
+  ran = (top3[-1]+top3[1]) / 2
+  print ran
+  for dist in top3:
       if dist < ran and dist!=None :
        print dist
        link = Links.objects.get(id = similar_dict[dist])
+       count+=1
        similar_links.append(link)
-
   var = RequestContext(request,{
         'feeds' : similar_links,
         'main_link':link_main,
       })
   return render_to_response("main/similar.html",var)
-
+def read_more(request,link_id):
+  link_main = Links.objects.get(id=link_id)
+  var = RequestContext(request,{
+        'feed':link_main,
+      })
+  return render_to_response("main/readmore.html",var)

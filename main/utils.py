@@ -29,11 +29,14 @@ def extract_content(url):
     g = Goose()
     article = g.extract(url = url)
     title = article.title
-    img_src = article.top_image.src
+    if hasattr(article,'top_image.src'):
+     img_src = article.top_image.src
+    else:
+     img_src = '/media/default.gif'
     content = article.cleaned_text
     print "befire if"
     print title
-    if article.title and img_src:
+    if article.title:
         print "here in if"
         return title,content.encode('utf-8'),img_src
     else:

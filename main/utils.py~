@@ -29,9 +29,15 @@ def extract_content(url):
     g = Goose()
     article = g.extract(url = url)
     title = article.title
-    img_src = article.top_image.src
+    if hasattr(article,'top_image.src'):
+     img_src = article.top_image.src
+    else:
+     img_src = '/home/nivedita/linker/linker/media/default.gif'
     content = article.cleaned_text
-    if article.title and img_src:
+    print "befire if"
+    print title
+    if article.title:
+        print "here in if"
         return title,content.encode('utf-8'),img_src
     else:
        return "","",""
@@ -81,10 +87,11 @@ def pearson(v1,v2):
 def find_similar(content1,content2):
          dist = 0.0
          similar = cosine_metric(content1,content2)
-         print similar
          if similar > 0.85:
            dist = calculate_distance(content1,content2)
-         return dist 
+           print dist
+           return dist
+
 def calculate_distance(content1,content2):
   apcount = {}
   wordscount = {}
@@ -110,7 +117,7 @@ def calculate_distance(content1,content2):
     data.append(temp)
   dist = pearson(data[0],data[1])
   return dist
-     
+
 def extract_words(text):
 
     '''

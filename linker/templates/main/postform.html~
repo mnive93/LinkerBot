@@ -2,7 +2,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $('#postform').submit(function(e) {
-  alert("heree")
   e.preventDefault();
   $.ajax({
     type: 'POST',
@@ -19,6 +18,8 @@ $(document).ready(function() {
 	{% csrf_token %}
         {{ form.content }}
        
-	
+<header>
+<h2>Share your favourite sites here</h2>
+</header>	
 <input type = "submit" value="Post" id="post_button" class= " post_button button "  />
 </form>

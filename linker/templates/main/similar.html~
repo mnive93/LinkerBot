@@ -22,17 +22,24 @@
 
 <!--<p>Let's put the feed here when we build it</p>-->
 {% for feed in feeds reversed %}
+<div class="container">
+<div class = "container-fluid">
 <div class="row-fluid well">
-
-
-<strong><a href="/{{feed.username}}">{{ feed.user.get_full_name }}</a></strong><br/>
+<strong>Shared by <a href="/{{feed.username}}">{{ feed.user.get_full_name }}</a></strong><br/>
   <strong><a href="{{ feed.url }}"> {{  feed.title }} </a></strong>
     	<small title="{{feed.posted_time}}">{{ feed.posted_time|timesince }} ago</small><br/>
 <strong> Posted in genre <a href="/genre/{{ feed.genre }}">{{ feed.genre }}</a> </strong><br/>
-<p class="post-content">{{ feed.content  | truncatechars:150 }}...Read More</p>
-<img src="{{ feed.img_src }}" height="300" width="300" class="img-rounded"/><br/>
 
+<div class="span6">
 
+<p class="post-content">{{ feed.content | truncatechars:350 }}...Read More</p>
+</div>
+<div class="span4">
+<img src="{{ feed.img_src }}" height="200" width="450" class="img-rounded"/><br/>
+</div>
+
+</div>
+</div>
 </div>
 {% endfor %}
 

@@ -8,6 +8,8 @@ urlpatterns += patterns('authentication.views',
     (r'^signup/$','home'),
     (r'^step2/$','step2'),
     (r'^followtopic/([\w ]+)','follow_topic'),
+    (r'logout/$', 'logout_page'),
+    
     )
 
 
